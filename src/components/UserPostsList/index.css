@@ -35,3 +35,30 @@
   line-height: 48px;
   color: #262626;
 }
+@media screen and (max-width: 767px) {
+  .post-image {
+    width: 118px;
+    height: 118px;
+    margin: 10px;
+  }
+
+  .user-posts-container {
+    flex-wrap: nowrap;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .post-image {
+    width: 208px;
+    height: 208px;
+    margin: 10px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .post-image {
+    width: 280px;
+    height: 280px;
+    margin: 10px;
+  }
+}

@@ -99,3 +99,21 @@
   color: #262626;
   margin-left: 10px;
 }
+
+@media screen and (max-width: 767px) {
+  .bio-container {
+    display: none;
+    margin-top: 15px;
+    margin-left: 4px;
+  }
+  .bio-container-l {
+    margin-top: 25px;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bio-container-l {
+    display: none;
+  }
+}

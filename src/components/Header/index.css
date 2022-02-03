@@ -188,3 +188,11 @@
     align-items: center;
   }
 }
+@media screen and (min-width: 1024px) {
+  .img-name {
+    margin-left: 50px;
+  }
+  .right-side {
+    margin-right: 50px;
+  }
+}

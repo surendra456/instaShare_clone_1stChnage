@@ -37,9 +37,15 @@ const ProfileCard = props => {
                 <span className="highlight">{followingCount} </span> Following
               </p>
             </div>
-            <p className="bio-name">{userName}</p>
-            <p className="bio">{userBio}</p>
+            <div className="bio-container">
+              <p className="bio-name">{userName}</p>
+              <p className="bio">{userBio}</p>
+            </div>
           </div>
+        </div>
+        <div className="bio-container-l">
+          <p className="bio-name">{userName}</p>
+          <p className="bio">{userBio}</p>
         </div>
         <ul className="user-stories">
           {stories.map(each => (
