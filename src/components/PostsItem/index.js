@@ -1,7 +1,7 @@
 import {BsHeart} from 'react-icons/bs'
 import {BiShareAlt} from 'react-icons/bi'
 import {FaRegComment} from 'react-icons/fa'
-
+import Cookies from 'js-cookie'
 import {Link} from 'react-router-dom'
 
 import './index.css'
@@ -10,6 +10,7 @@ const PostsItem = props => {
   const {item} = props
   const {
     userId,
+    postId,
     userName,
     profilePic,
     postDetails,
@@ -17,6 +18,22 @@ const PostsItem = props => {
     comments,
     createdAt,
   } = item
+
+  const onLikeIcon = async () => {
+    const token = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
+    const post = {like_status: true}
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(post),
+      method: 'POST',
+    }
+    const response = await fetch(apiUrl, options)
+    const data = await response.json()
+    console.log(response)
+  }
 
   return (
     <li className="post-item">
@@ -35,13 +52,18 @@ const PostsItem = props => {
       <img src={postDetails.imageUrl} alt="post" className="post-image-h" />
       <div className="components-container">
         <div className="button-container">
-          <button className="button-reacts" testid="likeIcon" type="button">
+          <button
+            className="button-reacts"
+            testid="likeIcon"
+            type="button"
+            onClick={onLikeIcon}
+          >
             <BsHeart className="react-image" />
           </button>
-          <button className="button-reacts" testid="likeIcon" type="button">
+          <button className="button-reacts" type="button">
             <FaRegComment className="react-image" />
           </button>
-          <button className="button-reacts" testid="likeIcon" type="button">
+          <button className="button-reacts" type="button">
             <BiShareAlt className="react-image" />
           </button>
         </div>

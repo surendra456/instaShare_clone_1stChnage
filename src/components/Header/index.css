@@ -2,6 +2,13 @@
   .medium-view {
     display: none;
   }
+  .header-head {
+    font: 'Roboto';
+    font-weight: 500;
+    margin-left: 5px;
+    size: 20px;
+    line-height: 24px;
+  }
   .nav-header {
     display: flex;
     flex-direction: row;
@@ -12,10 +19,7 @@
     min-width: 900px;
   }
   .header-img {
-    width: 173px;
-    height: 30px;
-    left: 200px;
-    top: 17px;
+    width: 59px;
   }
   .right-side {
     display: flex;
@@ -68,6 +72,12 @@
     padding: 4px;
     color: #ffffff;
   }
+}
+
+.img-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 @media screen and (min-width: 481px) and (max-width: 767px) {
@@ -146,6 +156,14 @@
 }
 
 @media screen and (max-width: 480px) {
+  .header-head {
+    font: 'Roboto';
+    font-weight: 500;
+    margin-left: 5px;
+    size: 20px;
+    line-height: 24px;
+  }
+
   .nav-header {
     display: flex;
     flex-direction: row;

@@ -14,7 +14,10 @@ const apiPostsStatus = {
 }
 
 class PostsList extends Component {
-  state = {apiPost: apiPostsStatus.initial, postsData: []}
+  state = {
+    apiPost: apiPostsStatus.initial,
+    postsData: [],
+  }
 
   componentDidMount() {
     this.getPostList()
@@ -53,6 +56,7 @@ class PostsList extends Component {
           createdAt: each.created_at,
         })),
       }
+
       this.setState({
         postsData: updatedData,
         apiPost: apiPostsStatus.success,
@@ -60,6 +64,16 @@ class PostsList extends Component {
     } else {
       this.setState({apiPost: apiPostsStatus.failure})
     }
+  }
+
+  likeCountIncremented = postId => {
+    this.setState(prev => ({
+      postsData: prev.postsData.posts.map(each =>
+        each.postId === postId
+          ? {...each, likesCount: prev.likesCount + 1}
+          : each,
+      ),
+    }))
   }
 
   renderLoadingView = () => (
@@ -79,7 +93,7 @@ class PostsList extends Component {
         alt="failure view"
         className="failure-img"
       />
-      <h1 className="failure-head">Something went wrong.Please try again</h1>
+      <p className="failure-head">Something went wrong. Please try again</p>
       <button className="failure-button" type="button" onClick={this.onRetry}>
         Try again
       </button>
@@ -92,7 +106,11 @@ class PostsList extends Component {
     return (
       <ul className="Posts-container">
         {postsData.posts.map(each => (
-          <PostsItem item={each} key={each.postId} />
+          <PostsItem
+            item={each}
+            key={each.postId}
+            likeCountIncremented={this.likeCountIncremented}
+          />
         ))}
       </ul>
     )

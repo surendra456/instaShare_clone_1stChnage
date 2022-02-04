@@ -1,4 +1,4 @@
-import {AiFillCamera} from 'react-icons/ai'
+import {BiCamera} from 'react-icons/bi'
 import './index.css'
 
 const UserPostsList = props => {
@@ -16,8 +16,8 @@ const UserPostsList = props => {
 
   const noPostView = () => (
     <div className="no-post-container">
-      <AiFillCamera className="no-post-image" />
-      <p className="no-post-head">No Posts Yet</p>
+      <BiCamera className="no-post-image" />
+      <h1 className="no-post-head">No Posts Yet</h1>
     </div>
   )
 

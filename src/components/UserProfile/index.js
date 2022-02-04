@@ -97,7 +97,7 @@ class UserProfile extends Component {
         alt="failure view"
         className="failure-img"
       />
-      <h1 className="failure-head">Something went wrong.Please try again</h1>
+      <p className="failure-head">Something went wrong. Please try again</p>
       <button className="failure-button" type="button" onClick={this.onRetry}>
         Try again
       </button>

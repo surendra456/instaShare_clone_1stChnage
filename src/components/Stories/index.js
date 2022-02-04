@@ -60,6 +60,27 @@ class Stories extends Component {
     return <StoriesList storiesList={storiesList} />
   }
 
+  onRetry = () => {
+    this.setState(
+      {apiStatusStories: apiStoriesStatus.inProgress},
+      this.getStoriesDetails,
+    )
+  }
+
+  renderStoriesFailureView = () => (
+    <div className="failure-view">
+      <img
+        src="https://res.cloudinary.com/dq7imhrvo/image/upload/v1643651534/insta%20Shere%20clone/alert-triangle_hczx0o.png"
+        alt="failure view"
+        className="failure-img"
+      />
+      <p className="failure-head">Something went wrong. Please try again</p>
+      <button className="failure-button" type="button" onClick={this.onRetry}>
+        Try again
+      </button>
+    </div>
+  )
+
   renderStoriesView = () => {
     const {apiStatusStories} = this.state
 
@@ -69,7 +90,7 @@ class Stories extends Component {
       case apiStoriesStatus.inProgress:
         return this.renderLoadingView()
       case apiStoriesStatus.failure:
-        return ''
+        return this.renderStoriesFailureView()
       default:
         return null
     }

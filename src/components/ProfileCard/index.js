@@ -10,6 +10,7 @@ const ProfileCard = props => {
 
   const {profile} = data
   const {
+    userId,
     userName,
     profilePic,
     followersCount,
@@ -17,6 +18,7 @@ const ProfileCard = props => {
     userBio,
     posts,
     stories,
+    postsCount,
   } = profile
 
   return (
@@ -28,7 +30,7 @@ const ProfileCard = props => {
             <h1 className="profile-head">{userName}</h1>
             <div className="count">
               <p className="count-follower">
-                <span className="highlight">{posts.length}</span>Posts
+                <span className="highlight">{postsCount}</span>Posts
               </p>
               <p className="count-follower">
                 <span className="highlight">{followersCount} </span> Followers
@@ -38,7 +40,7 @@ const ProfileCard = props => {
               </p>
             </div>
             <div className="bio-container">
-              <p className="bio-name">{userName}</p>
+              <p className="bio-name">{userId}</p>
               <p className="bio">{userBio}</p>
             </div>
           </div>
