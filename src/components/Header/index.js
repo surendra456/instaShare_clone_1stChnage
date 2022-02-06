@@ -16,6 +16,8 @@ const Header = props => (
         onChangeSearchInput,
         setSearchInput,
         onMoreOptionsState,
+        searchBox,
+        searchValue,
       } = value
 
       const onLogout = () => {
@@ -36,6 +38,30 @@ const Header = props => (
         setSearchInput()
       }
 
+      const searchContainerView = () => {
+        searchBox()
+      }
+
+      const searchBoxContainer = () => (
+        <div className="input-container">
+          <input
+            className="search-input"
+            type="search"
+            placeholder="Search Caption"
+            onChange={ChangeSearchInput}
+            value={searchInput}
+          />
+          <button
+            className="button-s"
+            testid="searchIcon"
+            type="button"
+            onClick={onsetSearchInput}
+          >
+            <FaSearch className="search-icon" />
+          </button>
+        </div>
+      )
+
       const onMoreOptionELe = () => (
         <div className="options-container">
           <ul className="header-links">
@@ -44,6 +70,13 @@ const Header = props => (
                 Home
               </Link>
             </li>
+            <button
+              className="search-option"
+              type="button"
+              onClick={searchContainerView}
+            >
+              Search
+            </button>
             <li className="link-tag">
               <Link to="/my-profile" className="link">
                 Profile
@@ -118,6 +151,7 @@ const Header = props => (
             </div>
           </nav>
           {click && onMoreOptionELe()}
+          {searchValue && searchBoxContainer()}
         </>
       )
     }}

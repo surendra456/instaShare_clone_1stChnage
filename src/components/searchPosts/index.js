@@ -103,11 +103,14 @@ class SearchPostsList extends Component {
     const {searchPostsData} = this.state
 
     return (
-      <ul className="Posts-container">
-        {searchPostsData.posts.map(each => (
-          <PostsItem item={each} key={each.postId} />
-        ))}
-      </ul>
+      <>
+        <h1 className="search-head">Search Result</h1>
+        <ul className="Posts-container">
+          {searchPostsData.posts.map(each => (
+            <PostsItem item={each} key={each.postId} />
+          ))}
+        </ul>
+      </>
     )
   }
 
