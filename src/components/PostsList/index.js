@@ -3,7 +3,7 @@ import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 
 import PostsItem from '../PostsItem'
-
+import SearchContext from '../../SearchContext/index'
 import './index.css'
 
 const apiPostsStatus = {
@@ -17,6 +17,7 @@ class PostsList extends Component {
   state = {
     apiPost: apiPostsStatus.initial,
     postsData: [],
+    button: false,
   }
 
   componentDidMount() {
@@ -66,6 +67,39 @@ class PostsList extends Component {
     }
   }
 
+  onChangeLikeIcon = async postId => {
+    this.setState(prev => ({button: !prev.button}))
+
+    const token = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
+    const post = {like_status: true}
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(post),
+      method: 'POST',
+    }
+    await fetch(apiUrl, options)
+  }
+
+  onChangeUnLikeIcon = async postId => {
+    this.setState(prev => ({button: !prev.button}))
+    const token = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
+    const post = {like_status: false}
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(post),
+      method: 'POST',
+    }
+    await fetch(apiUrl, options)
+  }
+
+  // like incremented function //
+
   likeCountIncremented = postId => {
     this.setState(prev => ({
       postsData: prev.postsData.posts.map(each =>
@@ -101,18 +135,26 @@ class PostsList extends Component {
   )
 
   renderPostsSuccessView = () => {
-    const {postsData} = this.state
+    const {postsData, button} = this.state
 
     return (
-      <ul className="Posts-container">
-        {postsData.posts.map(each => (
-          <PostsItem
-            item={each}
-            key={each.postId}
-            likeCountIncremented={this.likeCountIncremented}
-          />
-        ))}
-      </ul>
+      <SearchContext.Provider
+        value={{
+          button,
+          onChangeLikeIcon: this.onChangeLikeIcon,
+          onChangeUnLikeIcon: this.onChangeUnLikeIcon,
+        }}
+      >
+        <ul className="Posts-container">
+          {postsData.posts.map(each => (
+            <PostsItem
+              item={each}
+              key={each.postId}
+              likeCountIncremented={this.likeCountIncremented}
+            />
+          ))}
+        </ul>
+      </SearchContext.Provider>
     )
   }
 

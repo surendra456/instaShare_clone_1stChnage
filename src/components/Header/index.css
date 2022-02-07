@@ -142,6 +142,7 @@
   .link-tag {
     color: #000000;
     font-family: 'roboto';
+    margin-left: 10px;
   }
   .logout-button {
     background-color: #4094ef;
@@ -158,9 +159,14 @@
   .options-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
   }
+}
+
+.close-button {
+  background-color: transparent;
+  border-width: 0px;
 }
 
 @media screen and (min-width: 768px) {

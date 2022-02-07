@@ -104,7 +104,7 @@ class SearchPostsList extends Component {
 
     return (
       <>
-        <h1 className="search-head">Search Result</h1>
+        <h1 className="search-head">Search Results</h1>
         <ul className="Posts-container">
           {searchPostsData.posts.map(each => (
             <PostsItem item={each} key={each.postId} />
@@ -115,7 +115,7 @@ class SearchPostsList extends Component {
   }
 
   renderEmptyView = () => (
-    <div className="failure-view">
+    <div className="Not-found-view">
       <img
         src="https://res.cloudinary.com/dq7imhrvo/image/upload/v1643965945/insta%20Shere%20clone/Group_c2v5dj.jpg"
         alt="search not found"

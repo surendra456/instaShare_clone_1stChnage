@@ -19,6 +19,10 @@ class App extends Component {
     searchValue: false,
   }
 
+  closeHeaderButtonIn = () => {
+    this.setState(prev => ({click: !prev.click}))
+  }
+
   onChangeSearchInput = input => {
     this.setState({searchInput: input})
   }
@@ -52,6 +56,7 @@ class App extends Component {
           setSearchInput: this.setSearchInput,
           onMoreOptionsState: this.moreOptions,
           searchBox: this.searchBox,
+          closeHeaderButtonIn: this.closeHeaderButtonIn,
         }}
       >
         <Switch>

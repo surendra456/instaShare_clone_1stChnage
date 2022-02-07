@@ -2,7 +2,7 @@ import {Link, withRouter} from 'react-router-dom'
 
 import {FaSearch} from 'react-icons/fa'
 import {GoThreeBars} from 'react-icons/go'
-
+import {AiFillCloseCircle} from 'react-icons/ai'
 import Cookies from 'js-cookie'
 import SearchContext from '../../SearchContext/index'
 import './index.css'
@@ -18,12 +18,17 @@ const Header = props => (
         onMoreOptionsState,
         searchBox,
         searchValue,
+        closeHeaderButtonIn,
       } = value
 
       const onLogout = () => {
         const {history} = props
         Cookies.remove('jwt_token')
         history.replace('/login')
+      }
+
+      const closeHeaderButton = () => {
+        closeHeaderButtonIn()
       }
 
       const onMoreOptions = () => {
@@ -85,6 +90,13 @@ const Header = props => (
           </ul>
           <button className="logout-button" type="button" onClick={onLogout}>
             Logout
+          </button>
+          <button
+            className="close-button"
+            type="button"
+            onClick={closeHeaderButton}
+          >
+            <AiFillCloseCircle className="close-button" />
           </button>
         </div>
       )
