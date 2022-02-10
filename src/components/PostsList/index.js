@@ -87,7 +87,7 @@ class PostsList extends Component {
     this.setState(prev => ({
       postsData: prev.postsData.posts.map(each => {
         if (each.postId === postId) {
-          return {...prev.each, likesCount: prev.likesCount + 1}
+          return {...each, likesCount: each.likesCount + 1}
         }
         return each
       }),
