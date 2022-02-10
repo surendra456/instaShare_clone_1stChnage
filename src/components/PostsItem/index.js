@@ -12,6 +12,7 @@ const PostsItem = props => (
     {value => {
       const {button, onChangeLikeIcon, onChangeUnLikeIcon} = value
       const {item} = props
+
       const {
         userId,
         postId,

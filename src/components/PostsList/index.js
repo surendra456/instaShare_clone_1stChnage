@@ -68,9 +68,11 @@ class PostsList extends Component {
   }
 
   onChangeLikeIcon = async postId => {
-    this.setState(prev => ({button: !prev.button}))
-
+    this.setState(prev => ({
+      button: !prev.button,
+    }))
     const token = Cookies.get('jwt_token')
+
     const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
     const post = {like_status: true}
     const options = {
@@ -81,6 +83,15 @@ class PostsList extends Component {
       method: 'POST',
     }
     await fetch(apiUrl, options)
+
+    this.setState(prev => ({
+      postsData: prev.postsData.post.map(each => {
+        if (each.postId === postId) {
+          return {...prev.each, likesCount: prev.likesCount + 1}
+        }
+        return each
+      }),
+    }))
   }
 
   onChangeUnLikeIcon = async postId => {
@@ -103,9 +114,7 @@ class PostsList extends Component {
   likeCountIncremented = postId => {
     this.setState(prev => ({
       postsData: prev.postsData.posts.map(each =>
-        each.postId === postId
-          ? {...each, likesCount: prev.likesCount + 1}
-          : each,
+        each.postId === postId ? {...each, likeStatus: !prev.likeStatus} : each,
       ),
     }))
   }
@@ -136,7 +145,7 @@ class PostsList extends Component {
 
   renderPostsSuccessView = () => {
     const {postsData, button} = this.state
-
+    console.log(postsData)
     return (
       <SearchContext.Provider
         value={{
@@ -148,8 +157,8 @@ class PostsList extends Component {
         <ul className="Posts-container">
           {postsData.posts.map(each => (
             <PostsItem
-              item={each}
               key={each.postId}
+              item={each}
               likeCountIncremented={this.likeCountIncremented}
             />
           ))}

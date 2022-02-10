@@ -23,7 +23,7 @@ const ProfileCard = props => {
 
   return (
     <>
-      <div className="Profile-card">
+      <li className="Profile-card">
         <div className="image-user-details">
           <img src={profilePic} alt={`${my} profile`} className="Profile-pic" />
           <div className="user-detail-container">
@@ -62,7 +62,7 @@ const ProfileCard = props => {
           </div>
           <UserPostsList posts={posts} my={my} />
         </div>
-      </div>
+      </li>
     </>
   )
 }

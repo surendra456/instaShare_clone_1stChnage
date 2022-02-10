@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   setSearchInput = () => {
-    this.setState({searchPostView: true})
+    this.setState(prev => ({searchPostView: !prev.searchPostView}))
   }
 
   moreOptions = () => {
