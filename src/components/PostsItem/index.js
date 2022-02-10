@@ -10,9 +10,8 @@ import './index.css'
 const PostsItem = props => (
   <SearchContext.Consumer>
     {value => {
-      const {button, onChangeLikeIcon, onChangeUnLikeIcon} = value
+      const {onChangeLikeIcon, onChangeUnLikeIcon} = value
       const {item} = props
-
       const {
         userId,
         postId,
@@ -22,6 +21,7 @@ const PostsItem = props => (
         likesCount,
         comments,
         createdAt,
+        likeStatus,
       } = item
 
       const likeIcon = () => {
@@ -49,7 +49,7 @@ const PostsItem = props => (
           <img src={postDetails.imageUrl} alt="post" className="post-image-h" />
           <div className="components-container">
             <div className="button-container">
-              {button ? (
+              {likeStatus ? (
                 <button
                   className="button-reacts"
                   testid="unLikeIcon"

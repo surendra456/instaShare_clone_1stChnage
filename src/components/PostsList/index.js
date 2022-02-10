@@ -38,25 +38,24 @@ class PostsList extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const data = await response.json()
-      const updatedData = {
-        posts: data.posts.map(each => ({
-          postId: each.post_id,
-          userId: each.user_id,
-          userName: each.user_name,
-          profilePic: each.profile_pic,
-          postDetails: {
-            imageUrl: each.post_details.image_url,
-            caption: each.post_details.caption,
-          },
-          likesCount: each.likes_count,
-          comments: each.comments.map(eachItem => ({
-            userName: eachItem.user_name,
-            userId: eachItem.user_id,
-            comment: eachItem.comment,
-          })),
-          createdAt: each.created_at,
+      const updatedData = data.posts.map(each => ({
+        postId: each.post_id,
+        userId: each.user_id,
+        likeStatus: false,
+        userName: each.user_name,
+        profilePic: each.profile_pic,
+        postDetails: {
+          imageUrl: each.post_details.image_url,
+          caption: each.post_details.caption,
+        },
+        likesCount: each.likes_count,
+        comments: each.comments.map(eachItem => ({
+          userName: eachItem.user_name,
+          userId: eachItem.user_id,
+          comment: eachItem.comment,
         })),
-      }
+        createdAt: each.created_at,
+      }))
 
       this.setState({
         postsData: updatedData,
@@ -85,9 +84,13 @@ class PostsList extends Component {
     await fetch(apiUrl, options)
 
     this.setState(prev => ({
-      postsData: prev.postsData.posts.map(each => {
+      postsData: prev.postsData.map(each => {
         if (each.postId === postId) {
-          return {...each, likesCount: each.likesCount + 1}
+          return {
+            ...each,
+            likesCount: each.likesCount + 1,
+            likeStatus: !each.likeStatus,
+          }
         }
         return each
       }),
@@ -107,15 +110,17 @@ class PostsList extends Component {
       method: 'POST',
     }
     await fetch(apiUrl, options)
-  }
-
-  // like incremented function //
-
-  likeCountIncremented = postId => {
     this.setState(prev => ({
-      postsData: prev.postsData.posts.map(each =>
-        each.postId === postId ? {...each, likeStatus: !prev.likeStatus} : each,
-      ),
+      postsData: prev.postsData.map(each => {
+        if (each.postId === postId) {
+          return {
+            ...each,
+            likesCount: each.likesCount - 1,
+            likeStatus: !each.likeStatus,
+          }
+        }
+        return each
+      }),
     }))
   }
 
@@ -145,22 +150,17 @@ class PostsList extends Component {
 
   renderPostsSuccessView = () => {
     const {postsData, button} = this.state
-    console.log(postsData)
+
     return (
       <SearchContext.Provider
         value={{
-          button,
           onChangeLikeIcon: this.onChangeLikeIcon,
           onChangeUnLikeIcon: this.onChangeUnLikeIcon,
         }}
       >
-        <ul className="Posts-container">
-          {postsData.posts.map(each => (
-            <PostsItem
-              key={each.postId}
-              item={each}
-              likeCountIncremented={this.likeCountIncremented}
-            />
+        <ul className="posts-container">
+          {postsData.map(each => (
+            <PostsItem key={each.postId} item={each} button={button} />
           ))}
         </ul>
       </SearchContext.Provider>
