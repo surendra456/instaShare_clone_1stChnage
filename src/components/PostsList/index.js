@@ -85,7 +85,7 @@ class PostsList extends Component {
     await fetch(apiUrl, options)
 
     this.setState(prev => ({
-      postsData: prev.postsData.post.map(each => {
+      postsData: prev.postsData.posts.map(each => {
         if (each.postId === postId) {
           return {...prev.each, likesCount: prev.likesCount + 1}
         }
