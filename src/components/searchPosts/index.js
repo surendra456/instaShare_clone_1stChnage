@@ -42,25 +42,23 @@ class SearchPostsList extends Component {
       if (data.posts.length === 0) {
         this.setState({apiSearchPost: apiSearchPostsStatus.empty})
       } else {
-        const updatedData = {
-          posts: data.posts.map(each => ({
-            postId: each.post_id,
-            userId: each.user_id,
-            userName: each.user_name,
-            profilePic: each.profile_pic,
-            postDetails: {
-              imageUrl: each.post_details.image_url,
-              caption: each.post_details.caption,
-            },
-            likesCount: each.likes_count,
-            comments: each.comments.map(eachItem => ({
-              userName: eachItem.user_name,
-              userId: eachItem.user_id,
-              comment: eachItem.comment,
-            })),
-            createdAt: each.created_at,
+        const updatedData = data.posts.map(each => ({
+          postId: each.post_id,
+          userId: each.user_id,
+          userName: each.user_name,
+          profilePic: each.profile_pic,
+          postDetails: {
+            imageUrl: each.post_details.image_url,
+            caption: each.post_details.caption,
+          },
+          likesCount: each.likes_count,
+          comments: each.comments.map(eachItem => ({
+            userName: eachItem.user_name,
+            userId: eachItem.user_id,
+            comment: eachItem.comment,
           })),
-        }
+          createdAt: each.created_at,
+        }))
 
         this.setState({
           searchPostsData: updatedData,
@@ -105,8 +103,8 @@ class SearchPostsList extends Component {
     return (
       <>
         <h1 className="search-head">Search Results</h1>
-        <ul className="Posts-container">
-          {searchPostsData.posts.map(each => (
+        <ul className="Posts-container-search">
+          {searchPostsData.map(each => (
             <PostsItem item={each} key={each.postId} />
           ))}
         </ul>

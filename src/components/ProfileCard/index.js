@@ -55,7 +55,7 @@ const ProfileCard = props => {
           ))}
         </ul>
         <hr className="line" />
-        <div className="posts-container">
+        <div className="posts-container-user">
           <div className="head-container">
             <BsGrid3X3 className="post-logo" />
             <h1 className="post-head">Posts</h1>
